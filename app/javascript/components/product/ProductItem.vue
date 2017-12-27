@@ -1,7 +1,7 @@
 <template>
   <div class="product" style="float: left; width: 28%; height: auto; margin: 15px; position: relative;">
-    <router-link :to="'/details/'+product['links']['self'].split('.com/products/')[1]" class="product-link" style="text-decoration:none; color:black;">
-      <div class="product__image">
+    <router-link :to="'/details/'+product['links']['self'].split('.com/products/')[1]" class="product-link"  style="text-decoration:none; color:black;">
+      <div class="product_image" v-on:mouseover="mouseOver">
         <img class="img-responsive" src="https://www.sephora.com/productimages/sku/s1995729-main-grid.jpg" alt="">
       </div>
       <div class="product__description" style="text-align: center; word-wrap: break-word; font-size: 12px;">
@@ -24,6 +24,11 @@
         OUT OF STOCK
       </div>
     </div>
+    <div v-else v-show="isShow" class="product_cart" style="background-color:red;height: 30px; line-height:30px; text-align: center; font-weight: bold; color: white; position: absolute; top: 110px; width: 190px; left: -25px; font-size: 12px;">
+      <div class="product_oos_text">
+        ADD TO BAG
+      </div>
+    </div>
   </div>
 </template>
 
@@ -31,5 +36,15 @@
   export default {
     name: 'product-item',
     props: ['product'],
+    data () {
+      return {
+        isShow: false
+      }
+    },
+    methods:{
+      mouseOver () {
+        isShow = !isShow
+      }
+    }
   }
 </script>
